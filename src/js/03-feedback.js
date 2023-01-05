@@ -2,12 +2,11 @@ const throttle = require('lodash.throttle');
 
 const feedbackFormEl = document.querySelector('.feedback-form');
 const userData = {};
+const STORAGE_KEY = 'feedback-form-state';
 
 function autofillContactForm() {
   try {
-    const userDataFromLS = JSON.parse(
-      localStorage.getItem('feedback-form-state')
-    );
+    const userDataFromLS = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
     //якщо localeStorage порожній нічого робити не потрібно
     if (userDataFromLS === null) {
@@ -31,14 +30,13 @@ function onFeedbackFormInput(e) {
   const value = target.value;
   userData[name] = value;
 
-  localStorage.setItem('feedback-form-state', JSON.stringify(userData));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
 }
 
 function onFeedbackFormSubmit(e) {
   e.preventDefault();
   feedbackFormEl.reset();
-  localStorage.removeItem('feedback-form-state');
-  console.log(userData);
+  localStorage.removeItem(STORAGE_KEY);
 }
 
 feedbackFormEl.addEventListener('submit', onFeedbackFormSubmit);
