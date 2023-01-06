@@ -36,10 +36,11 @@ function onFeedbackFormSubmit(e) {
 
   if (email.value === '' || message.value === '') {
     alert('All fields must be filled');
+  } else {
+    feedbackFormEl.reset();
+    localStorage.removeItem(STORAGE_KEY);
+    console.log(userData);
   }
-  feedbackFormEl.reset();
-  localStorage.removeItem(STORAGE_KEY);
-  console.log(userData);
 }
 
 feedbackFormEl.addEventListener('submit', onFeedbackFormSubmit);
