@@ -1,6 +1,8 @@
 const throttle = require('lodash.throttle');
 
 const feedbackFormEl = document.querySelector('.feedback-form');
+// const inputEl = document.querySelector('input');
+// const textareaEl = document.querySelector('textarea');
 const STORAGE_KEY = 'feedback-form-state';
 let userData = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? {};
 
@@ -28,7 +30,13 @@ function onFeedbackFormInput(e) {
 
 function onFeedbackFormSubmit(e) {
   e.preventDefault();
+  const {
+    elements: { email, message },
+  } = e.target;
 
+  if (email.value === '' || message.value === '') {
+    alert('All fields must be filled');
+  }
   feedbackFormEl.reset();
   localStorage.removeItem(STORAGE_KEY);
   console.log(userData);
