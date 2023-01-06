@@ -1,21 +1,14 @@
 const throttle = require('lodash.throttle');
 
 const feedbackFormEl = document.querySelector('.feedback-form');
-const userData = {};
 const STORAGE_KEY = 'feedback-form-state';
+let userData = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? {};
 
 function autofillContactForm() {
   try {
-    const userDataFromLS = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-    //якщо localeStorage порожній нічого робити не потрібно
-    if (userDataFromLS === null) {
-      return;
-    }
-
     //перебираємо об'єкт циклом та робимо автозаповнення зі сховища
-    for (const key in userDataFromLS) {
-      feedbackFormEl.elements[key].value = userDataFromLS[key];
+    for (const key in userData) {
+      feedbackFormEl.elements[key].value = userData[key];
     }
   } catch (err) {
     console.log(err);
@@ -35,8 +28,10 @@ function onFeedbackFormInput(e) {
 
 function onFeedbackFormSubmit(e) {
   e.preventDefault();
+
   feedbackFormEl.reset();
   localStorage.removeItem(STORAGE_KEY);
+  console.log(userData);
 }
 
 feedbackFormEl.addEventListener('submit', onFeedbackFormSubmit);
