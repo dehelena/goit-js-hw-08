@@ -2,7 +2,7 @@ const throttle = require('lodash.throttle');
 
 const feedbackFormEl = document.querySelector('.feedback-form');
 const STORAGE_KEY = 'feedback-form-state';
-let userData = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? {};
+let userData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
 function autofillContactForm() {
   try {
