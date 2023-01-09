@@ -30,8 +30,6 @@ function onFeedbackFormSubmit(e) {
     elements: { email, message },
   } = e.target;
 
-  console.log(e);
-
   if (email.value === '' || message.value === '') {
     alert('All fields must be filled');
   } else {
