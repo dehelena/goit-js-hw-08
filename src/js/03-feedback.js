@@ -18,9 +18,7 @@ function autofillContactForm() {
 autofillContactForm(); //викликається одразу як запускається скрипт
 
 function onFeedbackFormInput(e) {
-  const { target } = e;
-  const name = target.name;
-  const value = target.value;
+  const { name, value } = e.target;
   userData[name] = value;
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
@@ -31,6 +29,8 @@ function onFeedbackFormSubmit(e) {
   const {
     elements: { email, message },
   } = e.target;
+
+  console.log(e);
 
   if (email.value === '' || message.value === '') {
     alert('All fields must be filled');
